@@ -154,7 +154,7 @@ Of course, these can be done as one or more steps.
 
 1) Count how many tracks belong to the "Hip Hop/Rap" genre
 ```ruby
-#Find the id of the "Hip Hop/Rap" genre
+#Find the primary id of the "Hip Hop/Rap" genre
 Genre.where("name = ?", "Hip Hop/Rap")
 #Count the tracks within the genre "Hip Hop/Rap" through ".count"
 Track.where(genre_id: 17).count
@@ -162,7 +162,7 @@ Track.where(genre_id: 17).count
 ```
 2) Find the most expensive Track that has the MediaType "MPEG audio file".
 ```ruby
-#Find the id of the media type "MPEG audio file"
+#Find the primary id of the media type "MPEG audio file"
 MediaType.where("name = ?", "MPEG audio file")
 #Find the track that has the maximun value in "unit price" whithin the "MPEG audio file" media type.
 Track.where(media_type: 1).maximum(:unit_price)
@@ -183,7 +183,7 @@ Track.joins(:playlists).where("playlists.id = 1")
 ```
 5) Find all the Tracks that belong to the 2 most recent playlists. *(HINT: This takes at least two ActiveRecord queries)*
 ```ruby
-# First,find the id of the 2 most recent playlists
+# First,find the primary ids of the 2 most recent playlists
 Playlist.order(updated_at: :desc).limit(2)
 # Then use ids as clues to find all the tracks that belong to the two playlists respectively
 Track.joins(:playlists).where("playlists.id = 17")
